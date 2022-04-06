@@ -5,7 +5,7 @@ use std::io::prelude::*;
 use std::io::Error;
 use std::process;
 
-fn create_grid_array(x: &Vec<String>, y: &Vec<String>) -> Vec<Vec<i32>> {
+fn create_grid_array(x: &[String], y: &[String]) -> Vec<Vec<i32>> {
     let m = x.len();
     let n = y.len();
 
@@ -25,14 +25,14 @@ fn create_grid_array(x: &Vec<String>, y: &Vec<String>) -> Vec<Vec<i32>> {
 }
 
 struct DiffHandler<'a> {
-    sequence1: &'a Vec<String>,
-    sequence2: &'a Vec<String>,
+    sequence1: &'a [String],
+    sequence2: &'a [String],
     grid: Vec<Vec<i32>>,
 }
 
 impl DiffHandler<'_> {
-    fn new<'a>(sequence1: &'a Vec<String>, sequence2: &'a Vec<String>) -> DiffHandler<'a> {
-        let grid = create_grid_array(&sequence1, &sequence2);
+    fn new<'a>(sequence1: &'a [String], sequence2: &'a [String]) -> DiffHandler<'a> {
+        let grid = create_grid_array(sequence1, sequence2);
 
         DiffHandler {
             sequence1,
@@ -51,7 +51,7 @@ impl DiffHandler<'_> {
         );
     }
 
-    fn _print_diff(c: Vec<Vec<i32>>, x: &Vec<String>, y: &Vec<String>, i: usize, j: usize) {
+    fn _print_diff(c: Vec<Vec<i32>>, x: &[String], y: &[String], i: usize, j: usize) {
         if i > 0 && j > 0 && x[i - 1] == y[j - 1] {
             DiffHandler::_print_diff(c, x, y, i - 1, j - 1);
             println!("  {}", x[i - 1]);
@@ -62,7 +62,7 @@ impl DiffHandler<'_> {
             DiffHandler::_print_diff(c, x, y, i - 1, j);
             println!("< {}", x[i - 1]);
         } else {
-            println!("");
+            println!();
         }
     }
 }
