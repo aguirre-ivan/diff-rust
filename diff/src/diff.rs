@@ -1,5 +1,10 @@
 use std::cmp::max;
 
+/// A Diff Handler can print two `Vec<String>` diff.
+/// 
+/// It has two sequences (`Vec<String>`) to apply diff.
+/// 
+/// Also has a grid to implement LCS - Longest Common Subsequence.
 pub struct DiffHandler<'a> {
     sequence1: &'a [String],
     sequence2: &'a [String],
@@ -7,6 +12,9 @@ pub struct DiffHandler<'a> {
 }
 
 impl DiffHandler<'_> {
+    /// Returns a DiffHandler with sequences lifetime.
+    /// 
+    /// Creates a grid to implement LCS - Longest Common Subsequence.
     pub fn new<'a>(sequence1: &'a [String], sequence2: &'a [String]) -> DiffHandler<'a> {
         let grid = DiffHandler::create_grid_array(sequence1, sequence2);
 
@@ -17,6 +25,39 @@ impl DiffHandler<'_> {
         }
     }
 
+    /// Prints sequences diff, it uses LCS - Longest Common Subsequence.
+    /// 
+    /// Examples
+    /// 
+    /// ```no_run
+    /// let lines_vec1 = file_handler::read_file_lines("file1.txt").unwrap_or_else(|err| {
+    ///     println!("FileError: {}: \"{}\"", err, "file1.txt");
+    ///     process::exit(1);
+    /// });
+    /// 
+    /// let lines_vec2 = file_handler::read_file_lines("file2.txt").unwrap_or_else(|err| {
+    ///     println!("FileError: {}: \"{}\"", err, "file2.txt");
+    ///     process::exit(1);
+    /// });
+    /// let diff_handler = diff::DiffHandler::new(&lines_vec1, &lines_vec2);
+    /// diff_handler.print_diff();
+    /// ```
+    /// With file1.txt: 
+    /// ```
+    /// hi
+    /// goodbye!
+    /// ```
+    /// and file2.txt:
+    /// ```
+    /// hellogoodbye
+    /// goodbye!
+    /// ```
+    /// It prints:
+    /// ```
+    /// < hi
+    /// > hello
+    /// goodbye!
+    /// ```
     pub fn print_diff(self) {
         DiffHandler::_print_diff(
             self.grid,
@@ -27,6 +68,7 @@ impl DiffHandler<'_> {
         );
     }
 
+    /// Creates a grid (`Vec<Vec<i32>>`) to implement LCS
     fn create_grid_array(x: &[String], y: &[String]) -> Vec<Vec<i32>> {
         let m = x.len();
         let n = y.len();

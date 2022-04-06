@@ -1,15 +1,23 @@
+// ! Diff
+
+// ! Compare two FILES line by line.
+// ! It takes two arguments (file names)
+
 mod diff;
 mod file_handler;
 
 use std::env;
 use std::process;
 
+// Args config to use in file_handler and diff
+// It contains file's names.
 struct ArgsConfig {
     filename1: String,
     filename2: String,
 }
 
 impl ArgsConfig {
+    // Reutrns struct ArgConfig
     fn new(args: &[String]) -> Result<ArgsConfig, String> {
         let len = args.len();
 
