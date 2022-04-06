@@ -12,8 +12,8 @@ fn create_grid_array(x: &[String], y: &[String]) -> Vec<Vec<i32>> {
     let mut grid = vec![vec![0; n + 1]; m + 1];
 
     for i in 0..m {
-        for j in 0..n {
-            if x[i] == y[j] {
+        for (j, line) in y.iter().enumerate().take(n) {
+            if x[i] == *line {
                 grid[i + 1][j + 1] = grid[i][j] + 1;
             } else {
                 grid[i + 1][j + 1] = max(grid[i + 1][j], grid[i][j + 1]);
