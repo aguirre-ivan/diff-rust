@@ -10,7 +10,7 @@ pub struct ArgsConfig {
 
 impl ArgsConfig {
     /// Reutrns struct ArgConfig
-    /// 
+    ///
     /// args: &[String]: Is string vec with 2 filenames
     pub fn new(args: &[String]) -> ArgsConfig {
         let len = args.len();

@@ -2,8 +2,8 @@
 //!
 //! To convert a file content to a Vec<String> with every line.
 
-use std::io::prelude::*;
 use std::fs::File;
+use std::io::prelude::*;
 use std::io::Error;
 
 /// Reads the .txt "file_name" and returns a String with file content.
