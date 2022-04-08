@@ -5,38 +5,11 @@
 
 mod diff;
 mod file_handler;
+mod args_config;
 
 use std::env;
 use std::process;
-
-// Args config to use in file_handler and diff
-// It contains file's names.
-struct ArgsConfig {
-    filename1: String,
-    filename2: String,
-}
-
-impl ArgsConfig {
-    // Reutrns struct ArgConfig
-    fn new(args: &[String]) -> Result<ArgsConfig, String> {
-        let len = args.len();
-
-        if len != 3 {
-            return Err(format!(
-                "ArgsError: Diff takes exactly 2 arguments ({} given)",
-                len - 1
-            ));
-        }
-
-        let filename1 = args[1].clone();
-        let filename2 = args[2].clone();
-
-        Ok(ArgsConfig {
-            filename1,
-            filename2,
-        })
-    }
-}
+use args_config::ArgsConfig;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
