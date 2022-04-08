@@ -3,14 +3,14 @@
 // ! Compare two FILES line by line.
 // ! It takes two arguments (file names)
 
-mod diff_vecs;
+mod diff_string_vecs;
 mod file_handler;
 mod args_config;
 
 use std::env;
 use std::process;
 use args_config::ArgsConfig;
-use diff_vecs::DiffVecsHandler;
+use diff_string_vecs::DiffStringVecsHandler;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -30,7 +30,7 @@ fn main() {
         process::exit(1);
     });
 
-    let diff_handler = DiffVecsHandler::new(&lines_vec1, &lines_vec2);
+    let diff_handler = DiffStringVecsHandler::new(&lines_vec1, &lines_vec2);
 
     diff_handler.print_diff();
 }

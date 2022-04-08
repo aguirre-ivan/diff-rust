@@ -5,20 +5,20 @@ use std::cmp::max;
 /// It has two sequences (`Vec<String>`) to apply diff.
 /// 
 /// Also has a grid to implement LCS - Longest Common Subsequence.
-pub struct DiffVecsHandler<'a> {
+pub struct DiffStringVecsHandler<'a> {
     sequence1: &'a [String],
     sequence2: &'a [String],
     grid: Vec<Vec<i32>>,
 }
 
-impl DiffVecsHandler<'_> {
-    /// Returns a DiffVecsHandler with sequences lifetime.
+impl DiffStringVecsHandler<'_> {
+    /// Returns a DiffStringVecsHandler with sequences lifetime.
     /// 
     /// Creates a grid to implement LCS - Longest Common Subsequence.
-    pub fn new<'a>(sequence1: &'a [String], sequence2: &'a [String]) -> DiffVecsHandler<'a> {
-        let grid = DiffVecsHandler::create_grid_array(sequence1, sequence2);
+    pub fn new<'a>(sequence1: &'a [String], sequence2: &'a [String]) -> DiffStringVecsHandler<'a> {
+        let grid = DiffStringVecsHandler::create_grid_array(sequence1, sequence2);
 
-        DiffVecsHandler {
+        DiffStringVecsHandler {
             sequence1,
             sequence2,
             grid,
@@ -39,7 +39,7 @@ impl DiffVecsHandler<'_> {
     ///     println!("FileError: {}: \"{}\"", err, "file2.txt");
     ///     process::exit(1);
     /// });
-    /// let diff_handler = diff::DiffVecsHandler::new(&lines_vec1, &lines_vec2);
+    /// let diff_handler = diff::DiffStringVecsHandler::new(&lines_vec1, &lines_vec2);
     /// diff_handler.print_diff();
     /// ```
     /// With file1.txt: 
@@ -59,7 +59,7 @@ impl DiffVecsHandler<'_> {
     /// goodbye!
     /// ```
     pub fn print_diff(self) {
-        DiffVecsHandler::_print_diff(
+        DiffStringVecsHandler::_print_diff(
             self.grid,
             self.sequence1,
             self.sequence2,
@@ -90,13 +90,13 @@ impl DiffVecsHandler<'_> {
 
     fn _print_diff(c: Vec<Vec<i32>>, x: &[String], y: &[String], i: usize, j: usize) {
         if i > 0 && j > 0 && x[i - 1] == y[j - 1] {
-            DiffVecsHandler::_print_diff(c, x, y, i - 1, j - 1);
+            DiffStringVecsHandler::_print_diff(c, x, y, i - 1, j - 1);
             println!("  {}", x[i - 1]);
         } else if j > 0 && (i == 0 || c[i][j - 1] >= c[i - 1][j]) {
-            DiffVecsHandler::_print_diff(c, x, y, i, j - 1);
+            DiffStringVecsHandler::_print_diff(c, x, y, i, j - 1);
             println!("> {}", y[j - 1]);
         } else if i > 0 && (j == 0 || c[i][j - 1] < c[i - 1][j]) {
-            DiffVecsHandler::_print_diff(c, x, y, i - 1, j);
+            DiffStringVecsHandler::_print_diff(c, x, y, i - 1, j);
             println!("< {}", x[i - 1]);
         } else {
             println!();
