@@ -17,12 +17,9 @@ impl ArgsConfig {
             ));
         }
 
-        let filename1 = args[1].clone();
-        let filename2 = args[2].clone();
-
         Ok(ArgsConfig {
-            filename1,
-            filename2,
+            filename1: args[1].clone(),
+            filename2: args[2].clone(),
         })
     }
 }
