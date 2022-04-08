@@ -1,10 +1,11 @@
+//! A Diff Vecs Handler can print two `Vec<String>` diff.
+//!
+//! It has two sequences (`Vec<String>`) to apply diff.
+//!
+//! Also has a grid to implement LCS - Longest Common Subsequence.
+
 use std::cmp::max;
 
-/// A Diff Vecs Handler can print two `Vec<String>` diff.
-///
-/// It has two sequences (`Vec<String>`) to apply diff.
-///
-/// Also has a grid to implement LCS - Longest Common Subsequence.
 pub struct DiffStringVecsHandler<'a> {
     string_vec_1: &'a [String],
     string_vec_2: &'a [String],
@@ -71,7 +72,7 @@ impl DiffStringVecsHandler<'_> {
         );
     }
 
-    /// Creates a grid (`Vec<Vec<i32>>`) to implement LCS
+    /// Creates a grid (`Vec<Vec<i32>>`) with LCS implementation
     fn create_grid_array(x: &[String], y: &[String]) -> Vec<Vec<i32>> {
         let m = x.len();
         let n = y.len();
@@ -91,6 +92,7 @@ impl DiffStringVecsHandler<'_> {
         grid
     }
 
+    /// Prints diff from LCS grid
     fn _print_diff(c: Vec<Vec<i32>>, x: &[String], y: &[String], i: usize, j: usize) {
         if i > 0 && j > 0 && x[i - 1] == y[j - 1] {
             DiffStringVecsHandler::_print_diff(c, x, y, i - 1, j - 1);

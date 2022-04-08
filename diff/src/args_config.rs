@@ -1,6 +1,8 @@
+//! Args config to use in file_handler and diff
+//!
+//! It contains file's names.
+
 use std::process;
-/// ! Args config to use in file_handler and diff
-/// ! It contains file's names.
 pub struct ArgsConfig {
     pub filename1: String,
     pub filename2: String,
@@ -8,7 +10,8 @@ pub struct ArgsConfig {
 
 impl ArgsConfig {
     /// Reutrns struct ArgConfig
-    /// args: &[String]: string vec with 2 filenames
+    /// 
+    /// args: &[String]: Is string vec with 2 filenames
     pub fn new(args: &[String]) -> ArgsConfig {
         let len = args.len();
 

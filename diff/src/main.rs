@@ -1,7 +1,8 @@
-// ! Diff
-
-// ! Compare two FILES line by line.
-// ! It takes two arguments (file names)
+//! Diff
+//!
+//! Compare two FILES line by line.
+//! 
+//! It takes two arguments (file names)
 
 mod args_config;
 mod diff_string_vecs;
