@@ -14,11 +14,7 @@ use diff_string_vecs::DiffStringVecsHandler;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-
-    let args_config = ArgsConfig::new(&args).unwrap_or_else(|err| {
-        println!("{:?}", err);
-        process::exit(1);
-    });
+    let args_config = ArgsConfig::new(&args);
 
     let lines_vec1 = file_handler::read_file_lines(&args_config.filename1).unwrap_or_else(|err| {
         println!("FileError: {}: \"{}\"", err, args_config.filename1);

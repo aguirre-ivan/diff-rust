@@ -1,3 +1,4 @@
+use std::process;
 // Args config to use in file_handler and diff
 // It contains file's names.
 pub struct ArgsConfig {
@@ -5,21 +6,20 @@ pub struct ArgsConfig {
     pub filename2: String,
 }
 
+
 impl ArgsConfig {
     // Reutrns struct ArgConfig
-    pub fn new(args: &[String]) -> Result<ArgsConfig, String> {
+    pub fn new(args: &[String]) -> ArgsConfig {
         let len = args.len();
 
         if len != 3 {
-            return Err(format!(
-                "ArgsError: Diff takes exactly 2 arguments ({} given)",
-                len - 1
-            ));
+            println!("ArgsError: Diff takes exactly 2 arguments ({} given)", len);
+            process::exit(1);
         }
 
-        Ok(ArgsConfig {
+        ArgsConfig {
             filename1: args[1].clone(),
             filename2: args[2].clone(),
-        })
+        }
     }
 }
