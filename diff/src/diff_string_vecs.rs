@@ -6,8 +6,8 @@ use std::cmp::max;
 /// 
 /// Also has a grid to implement LCS - Longest Common Subsequence.
 pub struct DiffStringVecsHandler<'a> {
-    sequence1: &'a [String],
-    sequence2: &'a [String],
+    string_vec_1: &'a [String],
+    string_vec_2: &'a [String],
     grid: Vec<Vec<i32>>,
 }
 
@@ -15,12 +15,12 @@ impl DiffStringVecsHandler<'_> {
     /// Returns a DiffStringVecsHandler with sequences lifetime.
     /// 
     /// Creates a grid to implement LCS - Longest Common Subsequence.
-    pub fn new<'a>(sequence1: &'a [String], sequence2: &'a [String]) -> DiffStringVecsHandler<'a> {
-        let grid = DiffStringVecsHandler::create_grid_array(sequence1, sequence2);
+    pub fn new<'a>(string_vec_1: &'a [String], string_vec_2: &'a [String]) -> DiffStringVecsHandler<'a> {
+        let grid = DiffStringVecsHandler::create_grid_array(string_vec_1, string_vec_2);
 
         DiffStringVecsHandler {
-            sequence1,
-            sequence2,
+            string_vec_1,
+            string_vec_2,
             grid,
         }
     }
@@ -61,10 +61,10 @@ impl DiffStringVecsHandler<'_> {
     pub fn print_diff(self) {
         DiffStringVecsHandler::_print_diff(
             self.grid,
-            self.sequence1,
-            self.sequence2,
-            self.sequence1.len(),
-            self.sequence2.len(),
+            self.string_vec_1,
+            self.string_vec_2,
+            self.string_vec_1.len(),
+            self.string_vec_2.len(),
         );
     }
 
