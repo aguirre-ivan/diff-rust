@@ -17,7 +17,7 @@ impl ArgsConfig {
         if len != 3 {
             return Err(format!(
                 "ArgsError: Diff takes exactly 2 arguments ({} given)",
-                len
+                len - 1
             ));
         }
 
