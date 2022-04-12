@@ -36,11 +36,8 @@ fn main() {
                 }
             }
         }
-
         Err(err) => {
             println!("{}", err);
         }
     }
-
-    // diff_handler.print_diff();
 }
